@@ -1,7 +1,9 @@
 {
     "name": "app",
     "scripts": {
-        "start": "node index.ts"
+        "dev": "$npm_execpath run build && $npm_execpath run start",
+        "build": "tsc index.ts --outDir dist",
+        "start": "node dist/index.js"
     },
     "devDependencies": {
         "typescript": "^5.3.3"

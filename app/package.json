@@ -1,7 +1,14 @@
 {
     "name": "app",
-    "packageManager": "yarn@4.0.2",
+    "scripts": {
+        "start": "node index.ts"
+    },
     "devDependencies": {
         "typescript": "^5.3.3"
-    }
+    },
+    "engines": {
+        "node": "^20.11.0",
+        "yarn": "^4.0.2"
+    },
+    "packageManager": "yarn@4.0.2"
 }

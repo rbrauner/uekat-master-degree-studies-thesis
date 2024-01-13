@@ -1,5 +1,8 @@
 {
-    "name": "app",
+    "name": "uekat-master-degree-studies-thesis",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
     "scripts": {
         "dev": "$npm_execpath run build && $npm_execpath run start",
         "build": "tsc index.ts --outDir dist",

@@ -12,15 +12,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"app@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "app@workspace:."
-  dependencies:
-    "@tsconfig/recommended": "npm:^1.0.3"
-    typescript: "npm:^5.3.3"
-  languageName: unknown
-  linkType: soft
-
 "typescript@npm:^5.3.3":
   version: 5.3.3
   resolution: "typescript@npm:5.3.3"
@@ -40,3 +31,12 @@ __metadata:
   checksum: 1d0a5f4ce496c42caa9a30e659c467c5686eae15d54b027ee7866744952547f1be1262f2d40de911618c242b510029d51d43ff605dba8fb740ec85ca2d3f9500
   languageName: node
   linkType: hard
+
+"uekat-master-degree-studies-thesis@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "uekat-master-degree-studies-thesis@workspace:."
+  dependencies:
+    "@tsconfig/recommended": "npm:^1.0.3"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft

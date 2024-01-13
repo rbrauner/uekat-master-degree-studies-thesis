@@ -12,6 +12,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.11.0":
+  version: 20.11.0
+  resolution: "@types/node@npm:20.11.0"
+  dependencies:
+    undici-types: "npm:~5.26.4"
+  checksum: 560aa850dfccb83326f9cba125459f6c3fb0c71ec78f22c61e4d248f1df78bd25fd6792cef573dfbdc49c882f8e38bb1a82ca87e0e28ff2513629c704c2b02af
+  languageName: node
+  linkType: hard
+
 "tello-drone@npm:^3.0.6":
   version: 3.0.6
   resolution: "tello-drone@npm:3.0.6"
@@ -44,7 +53,15 @@ __metadata:
   resolution: "uekat-master-degree-studies-thesis@workspace:."
   dependencies:
     "@tsconfig/recommended": "npm:^1.0.3"
+    "@types/node": "npm:^20.11.0"
     tello-drone: "npm:^3.0.6"
     typescript: "npm:^5.3.3"
   languageName: unknown
   linkType: soft
+
+"undici-types@npm:~5.26.4":
+  version: 5.26.5
+  resolution: "undici-types@npm:5.26.5"
+  checksum: bb673d7876c2d411b6eb6c560e0c571eef4a01c1c19925175d16e3a30c4c428181fb8d7ae802a261f283e4166a0ac435e2f505743aa9e45d893f9a3df017b501
+  languageName: node
+  linkType: hard

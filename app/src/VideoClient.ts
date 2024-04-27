@@ -8,16 +8,23 @@ export class VideoClient {
     constructor() {
         this.server = createSocket('udp4');
         this.server.on('message', (msg, rinfo) => {
-            console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
+            console.log(`Server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
         });
         this.server.on('listening', () => {
             const address = this.server.address();
-            console.log(`server listening ${address.address}:${address.port}`);
+            console.log(`Server listening ${address.address}:${address.port}`);
         });
         this.server.on('error', (err) => {
-            console.error(`server error:\n${err.stack}`);
+            console.error(`Server error:\n${err.stack}`);
             this.server.close();
         });
+    }
+
+    start() {
         this.server.bind(VideoClient.PORT, VideoClient.HOST);
+    }
+
+    stop() {
+        this.server.close();
     }
 }

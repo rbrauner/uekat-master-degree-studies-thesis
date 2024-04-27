@@ -13,13 +13,16 @@ export class App {
         try {
             console.log('Start');
 
+            this.videoClient.start();
+            console.log('VideoClient started');
+
             let result = null;
 
             result = await sdk.control.connect();
             console.log(`Connect: ${result}`);
 
             result = (await sdk.read.battery()).trim();
-            console.log(`Battery: ${result}`);
+            console.log(`Battery: ${result}%`);
 
             result = await commander.send('streamon');
             console.log(`Streamon: ${result}`);

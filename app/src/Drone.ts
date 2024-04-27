@@ -1,11 +1,17 @@
+import { Socket, createSocket } from "dgram";
+
 export class Drone {
     private static HOST = '0.0.0.0';
     private static PORT = 8889;
 
+    private client: Socket;
+
     constructor() {
+        this.client = createSocket('udp4');
     }
 
     async command(msg: string): Promise<any> {
+        return this.client.send(msg, Drone.PORT, Drone.HOST);
     }
 
     async connect(): Promise<string> {

@@ -2,25 +2,41 @@ const sdk = require('tellojs');
 const commander = require('tellojs/src/exchanger');
 import express from "express";
 import * as core from "express-serve-static-core";
+import WebSocket from "ws";
 
 export class Server {
-    private app: core.Express;
+    private static readonly APP_PORT = 3000;
+    private static readonly WS_PORT = 8080;
 
-    constructor() {
-        this.app = express();
-    }
+    private appServer: core.Express|null = null;
+    private webSocketServer: WebSocket.Server|null = null;
 
-    async start(port: number) {
-        this.app.get('/', (req: any, res: any) => {
+    constructor() {}
+
+    async start() {
+        this.appServer = express();
+
+        this.appServer.get('/', (req: any, res: any) => {
             res.sendFile(__dirname + '/view/index.html');
         });
 
-        this.app.listen(port, () => {
-            console.log(`Express server listening on port ${port}`);
+        this.appServer.listen(Server.APP_PORT, () => {
+            console.log(`Express server listening on port ${Server.APP_PORT}`);
         });
+
+        this.webSocketServer = new WebSocket.Server({ port: Server.WS_PORT });
     }
 
     async stop() {
-        this.app.close();
+        this.appServer?.close();
+        this.webSocketServer?.close();
+    }
+
+    getAppServer() {
+        return this.appServer;
+    }
+
+    getWebSocketServer() {
+        return this.webSocketServer;
     }
 }

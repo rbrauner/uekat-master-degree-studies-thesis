@@ -19,7 +19,7 @@ export class App {
         try {
             console.log('Start');
 
-            this.server.start(3000);
+            this.server.start();
 
             // this.videoClient.start();
             // console.log('VideoClient started');

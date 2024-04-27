@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "UE Katowice - Master Degree Studies - Thesis - App",
     "scripts": {
-        "dev": "node index.ts"
+        "dev": "$npm_execpath dlx ts-node index.ts"
     },
     "keywords": [],
     "author": "Rafał Brauner <rafalbrauner@gmail.com",

@@ -18,11 +18,17 @@ importers:
       '@tsconfig/recommended':
         specifier: ^1.0.6
         version: 1.0.6
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.12.7
 
 packages:
 
   '@tsconfig/recommended@1.0.6':
     resolution: {integrity: sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==}
+
+  '@types/node@20.12.7':
+    resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
 
   tellojs@0.1.199:
     resolution: {integrity: sha512-+nXsqMqc0P/1VXw7FF1NsLP/V7Rlfk8EcM4lQufhIZ3IofVB65rAJWyt98QNTQCtZ0r899y9S4mvbUqWJKFKWA==}
@@ -32,10 +38,19 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+
 snapshots:
 
   '@tsconfig/recommended@1.0.6': {}
 
+  '@types/node@20.12.7':
+    dependencies:
+      undici-types: 5.26.5
+
   tellojs@0.1.199: {}
 
   typescript@5.4.5: {}
+
+  undici-types@5.26.5: {}

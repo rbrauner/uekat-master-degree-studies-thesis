@@ -10,7 +10,8 @@
     "author": "Rafał Brauner <rafalbrauner@gmail.com",
     "license": "MIT",
     "devDependencies": {
-        "@tsconfig/recommended": "^1.0.6"
+        "@tsconfig/recommended": "^1.0.6",
+        "@types/node": "^20.12.7"
     },
     "peerDependencies": {
         "typescript": "^5.4.5"

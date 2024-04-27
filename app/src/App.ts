@@ -20,12 +20,7 @@ export class App {
             console.log('Start');
 
             this.server.start();
-
-            // this.videoClient.start();
-            // console.log('VideoClient started');
-
-            // this.videoClient.startMpv();
-            // console.log('VideoClient mpv started');
+            this.videoServer.start(this.server.getWebSocketServer());
 
             let result = null;
 
@@ -37,9 +32,6 @@ export class App {
 
             result = await this.drone.streamon();
             console.log(`Streamon: ${result}`);
-
-            // this.videoClient.stop();
-            // console.log('VideoClient stopped');
 
             console.log('End');
         } catch (error) {

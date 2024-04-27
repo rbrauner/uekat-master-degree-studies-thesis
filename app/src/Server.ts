@@ -32,11 +32,11 @@ export class Server {
         this.webSocketServer?.close();
     }
 
-    getAppServer() {
+    getAppServer(): core.Express {
         return this.appServer;
     }
 
-    getWebSocketServer() {
+    getWebSocketServer(): WebSocket.Server {
         return this.webSocketServer;
     }
 }

@@ -2,7 +2,6 @@
     "name": "uekat-master-degree-studies-thesis-app",
     "version": "1.0.0",
     "description": "UE Katowice - Master Degree Studies - Thesis - App",
-    "main": "index.ts",
     "scripts": {
         "dev": "node index.ts"
     },

@@ -1,16 +1,18 @@
-const { Tello } = require('./Tello');
+const { Drone } = require('./Drone');
 
 export class App {
     async main() {
         try {
             console.log('Start');
 
-            const tello = new Tello();
-            await tello.connect();
-            console.log('Tello - Connect');
+            const drone = new Drone();
+            console.log('Drone created');
 
-            const battery = (await tello.battery()).trim();
-            console.log(`Tello - Battery: ${battery}%`);
+            await drone.connect();
+            console.log('Drone connected');
+
+            const battery = await drone.battery();
+            console.log(`Battery: ${battery}%`);
 
             console.log('End');
         } catch (error) {

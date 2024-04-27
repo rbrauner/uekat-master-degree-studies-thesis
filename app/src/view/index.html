@@ -17,12 +17,52 @@
     <video id="videoPlayer" autoplay></video>
 
     <script>
-        const videoPlayer = document.getElementById('videoPlayer');
-        const ws = new WebSocket('ws://localhost:8080');
+        var videoPlayer = document.getElementById('videoPlayer');
+        var mediaSource = new MediaSource();
 
-        ws.onmessage = function (event) {
-            // videoPlayer.src = URL.createObjectURL(new Blob([event.data], { type: 'video/mp4' }));
-        };
+        videoPlayer.src = URL.createObjectURL(mediaSource);
+
+        mediaSource.addEventListener('sourceopen', function () {
+            var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.640028"');
+            initializeWebSocket(sourceBuffer);
+        });
+
+        function initializeWebSocket(sourceBuffer) {
+            var socket = new WebSocket('ws://localhost:8080');
+            socket.binaryType = 'arraybuffer';
+
+            var bufferQueue = [];
+            var isAppending = false;
+
+            socket.onmessage = function (event) {
+                if (!isAppending) {
+                    bufferQueue.push(event.data);
+                    appendNextBuffer();
+                } else {
+                    bufferQueue.push(event.data);
+                }
+            };
+
+            function appendNextBuffer() {
+                if (bufferQueue.length > 0) {
+                    isAppending = true;
+                    sourceBuffer.appendBuffer(bufferQueue.shift());
+                }
+            }
+
+            sourceBuffer.addEventListener('updateend', function () {
+                isAppending = false;
+                appendNextBuffer();
+            });
+
+            socket.onerror = function (error) {
+                console.error('Błąd połączenia WebSocket: ', error);
+            };
+
+            socket.onclose = function (event) {
+                console.log('Połączenie zamknięte');
+            };
+        }
     </script>
 </body>
 

@@ -1,0 +1,41 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      tellojs:
+        specifier: ^0.1.199
+        version: 0.1.199
+      typescript:
+        specifier: ^5.4.5
+        version: 5.4.5
+    devDependencies:
+      '@tsconfig/recommended':
+        specifier: ^1.0.6
+        version: 1.0.6
+
+packages:
+
+  '@tsconfig/recommended@1.0.6':
+    resolution: {integrity: sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==}
+
+  tellojs@0.1.199:
+    resolution: {integrity: sha512-+nXsqMqc0P/1VXw7FF1NsLP/V7Rlfk8EcM4lQufhIZ3IofVB65rAJWyt98QNTQCtZ0r899y9S4mvbUqWJKFKWA==}
+
+  typescript@5.4.5:
+    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+snapshots:
+
+  '@tsconfig/recommended@1.0.6': {}
+
+  tellojs@0.1.199: {}
+
+  typescript@5.4.5: {}

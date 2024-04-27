@@ -1,15 +1,26 @@
 {
-    "name": "uekat-master-degree-studies-thesis",
-    "module": "index.ts",
-    "type": "module",
+    "name": "uekat-master-degree-studies-thesis-app",
+    "version": "1.0.0",
+    "description": "UE Katowice - Master Degree Studies - Thesis - App",
+    "main": "index.ts",
+    "scripts": {
+        "dev": "node index.ts"
+    },
+    "keywords": [],
+    "author": "Rafał Brauner <rafalbrauner@gmail.com",
+    "license": "MIT",
     "devDependencies": {
-        "@tsconfig/recommended": "^1.0.6",
-        "@types/bun": "latest"
+        "@tsconfig/recommended": "^1.0.6"
     },
     "peerDependencies": {
         "typescript": "^5.4.5"
     },
     "dependencies": {
         "tellojs": "^0.1.199"
-    }
+    },
+    "engines": {
+        "node": "20.12.2",
+        "pnpm": "9.0.6"
+    },
+    "packageManager": "pnpm@9.0.6"
 }

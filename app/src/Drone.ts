@@ -1,7 +1,7 @@
 import { Socket, createSocket } from "dgram";
 
 export class Drone {
-    private static HOST = '0.0.0.0';
+    private static HOST = '192.168.10.1';
     private static PORT = 8889;
 
     private client: Socket;

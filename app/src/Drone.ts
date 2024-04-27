@@ -5,14 +5,14 @@ export class Drone {
     constructor() {
     }
 
-    async command(msg: string) {
+    async command(msg: string): Promise<any> {
     }
 
-    async connect() {
+    async connect(): Promise<string> {
         return this.command('command');
     }
 
-    async battery() {
+    async battery(): Promise<number> {
         return this.command('battery?');
     }
 }

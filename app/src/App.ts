@@ -1,17 +1,23 @@
-const { Drone } = require('./Drone');
+import { Drone } from "./Drone";
+import { VideoClient } from "./VideoClient";
 
 export class App {
+    private drone: Drone;
+    private videoClient: VideoClient;
+
+    constructor() {
+        this.drone = new Drone();
+        this.videoClient = new VideoClient();
+    }
+
     async main() {
         try {
             console.log('Start');
 
-            const drone = new Drone();
-            console.log('Drone created');
-
-            await drone.connect();
+            await this.drone.connect();
             console.log('Drone connected');
 
-            const battery = await drone.battery();
+            const battery = await this.drone.battery();
             console.log(`Battery: ${battery}%`);
 
             console.log('End');

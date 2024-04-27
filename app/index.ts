@@ -1,4 +1,4 @@
-const { App } = require('./src/App');
+import { App } from "./src/App";
 
 const app = new App();
 app.main();

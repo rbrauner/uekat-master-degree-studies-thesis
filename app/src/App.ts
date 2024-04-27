@@ -27,10 +27,14 @@ export class App {
             result = await commander.send('streamon');
             console.log(`Streamon: ${result}`);
 
+            this.videoClient.stop();
+            console.log('VideoClient stopped');
+
             console.log('End');
         } catch (error) {
-            // await sdk.control.land();
             console.error(error);
+            await sdk.control.land();
+            this.videoClient.stop();
         }
     }
 }

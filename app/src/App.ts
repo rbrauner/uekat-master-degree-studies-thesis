@@ -1,22 +1,25 @@
 const sdk = require('tellojs');
 const commander = require('tellojs/src/exchanger');
+import { Drone } from "./Drone";
 import { Server } from "./Server";
-import { VideoClient } from "./VideoClient";
+import { VideoServer } from "./VideoServer";
 
 export class App {
-    private videoClient: VideoClient;
+    private drone: Drone;
     private server: Server;
+    private videoServer: VideoServer;
 
     constructor() {
-        this.videoClient = new VideoClient();
+        this.drone = new Drone();
         this.server = new Server();
+        this.videoServer = new VideoServer();
     }
 
     async main() {
         try {
             console.log('Start');
 
-            // this.server.start(3000);
+            this.server.start(3000);
 
             // this.videoClient.start();
             // console.log('VideoClient started');
@@ -26,13 +29,13 @@ export class App {
 
             let result = null;
 
-            result = await sdk.control.connect();
+            result = await this.drone.connect();
             console.log(`Connect: ${result}`);
 
-            result = (await sdk.read.battery()).trim();
+            result = (await this.drone.battery()).trim();
             console.log(`Battery: ${result}%`);
 
-            result = await commander.send('streamon');
+            result = await this.drone.streamon();
             console.log(`Streamon: ${result}`);
 
             // this.videoClient.stop();
@@ -41,8 +44,9 @@ export class App {
             console.log('End');
         } catch (error) {
             console.error(error);
-            await sdk.control.land();
-            this.videoClient.stop();
+            await this.drone.stop();
+            this.server.stop();
+            this.videoServer.stop();
         }
     }
 }

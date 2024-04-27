@@ -2,7 +2,7 @@ import { spawn } from "child_process";
 import { Socket, createSocket } from "dgram";
 import express from "express";
 
-export class VideoClient {
+export class VideoServer {
     private static HOST = '0.0.0.0';
     private static PORT = 11111;
 
@@ -31,7 +31,7 @@ export class VideoClient {
                 server.close();
             });
 
-            server.bind(VideoClient.PORT, VideoClient.HOST);
+            server.bind(VideoServer.PORT, VideoServer.HOST);
         });
         app.listen(3000);
     }

@@ -15,9 +15,6 @@
     "peerDependencies": {
         "typescript": "^5.4.5"
     },
-    "dependencies": {
-        "tellojs": "^0.1.199"
-    },
     "engines": {
         "node": "20.12.2",
         "pnpm": "9.0.6"

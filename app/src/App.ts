@@ -1,12 +1,11 @@
-import { Drone } from "./Drone";
+const sdk = require('tellojs');
+const commander = require('tellojs/src/exchanger');
 import { VideoClient } from "./VideoClient";
 
 export class App {
-    private drone: Drone;
     private videoClient: VideoClient;
 
     constructor() {
-        this.drone = new Drone();
         this.videoClient = new VideoClient();
     }
 
@@ -14,11 +13,16 @@ export class App {
         try {
             console.log('Start');
 
-            await this.drone.connect();
-            console.log('Drone connected');
+            let result = null;
 
-            const battery = await this.drone.battery();
-            console.log(`Battery: ${battery}%`);
+            result = await sdk.control.connect();
+            console.log(`Connect: ${result}`);
+
+            result = (await sdk.read.battery()).trim();
+            console.log(`Battery: ${result}`);
+
+            result = await commander.send('streamon');
+            console.log(`Streamon: ${result}`);
 
             console.log('End');
         } catch (error) {

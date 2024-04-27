@@ -1,5 +1,6 @@
 import { spawn } from "child_process";
 import { Socket, createSocket } from "dgram";
+import express from "express";
 
 export class VideoClient {
     private static HOST = '0.0.0.0';
@@ -9,6 +10,30 @@ export class VideoClient {
 
     constructor() {
         this.server = createSocket('udp4');
+
+        const server = createSocket('udp4');
+        const app = express();
+        app.get('/stream', (req: any, res: any) => {
+            server.on('message', (msg, rinfo) => {
+                res.setHeader('Content-Type', 'video/mp4; charset=utf-8');
+                res.setHeader('Transfer-Encoding', 'chunked');
+                res.write(msg);
+                // TODO: Implement video processing
+            });
+
+            server.on('listening', () => {
+                const address = server.address();
+                console.log(`Server listening ${address.address}:${address.port}`);
+            });
+
+            server.on('error', (err) => {
+                console.error(`Server error:\n${err.stack}`);
+                server.close();
+            });
+
+            server.bind(VideoClient.PORT, VideoClient.HOST);
+        });
+        app.listen(3000);
     }
 
     startServer() {

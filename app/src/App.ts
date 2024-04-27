@@ -13,8 +13,11 @@ export class App {
         try {
             console.log('Start');
 
-            this.videoClient.start();
-            console.log('VideoClient started');
+            // this.videoClient.start();
+            // console.log('VideoClient started');
+
+            // this.videoClient.startMpv();
+            // console.log('VideoClient mpv started');
 
             let result = null;
 
@@ -27,8 +30,8 @@ export class App {
             result = await commander.send('streamon');
             console.log(`Streamon: ${result}`);
 
-            this.videoClient.stop();
-            console.log('VideoClient stopped');
+            // this.videoClient.stop();
+            // console.log('VideoClient stopped');
 
             console.log('End');
         } catch (error) {

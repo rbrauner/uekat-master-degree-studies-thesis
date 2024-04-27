@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        video {
+            width: 100%;
+            height: auto;
+        }
+    </style>
 </head>
+
 <body>
-    Hello world
+    <video id="videoPlayer" autoplay></video>
+
+    <script>
+        const videoPlayer = document.getElementById('videoPlayer');
+        const ws = new WebSocket('ws://localhost:8080');
+
+        ws.onmessage = function (event) {
+            // videoPlayer.src = URL.createObjectURL(new Blob([event.data], { type: 'video/mp4' }));
+        };
+    </script>
 </body>
+
 </html>

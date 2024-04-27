@@ -1,17 +1,16 @@
 const sdk = require('tellojs');
 const commander = require('tellojs/src/exchanger');
-import express from "express";
-import * as core from "express-serve-static-core";
+import express, { Express } from "express";
 import WebSocket from "ws";
 
 export class Server {
     private static readonly APP_PORT = 3000;
     private static readonly WS_PORT = 8080;
 
-    private appServer: core.Express|null = null;
-    private webSocketServer: WebSocket.Server|null = null;
+    private appServer: Express | null = null;
+    private webSocketServer: WebSocket.Server | null = null;
 
-    constructor() {}
+    constructor() { }
 
     async start() {
         this.appServer = express();
@@ -28,15 +27,16 @@ export class Server {
     }
 
     async stop() {
-        this.appServer?.close();
+        // TODO: typescript
+        // this.appServer?.close();
         this.webSocketServer?.close();
     }
 
-    getAppServer(): core.Express {
+    getAppServer(): Express | null {
         return this.appServer;
     }
 
-    getWebSocketServer(): WebSocket.Server {
+    getWebSocketServer(): WebSocket.Server | null {
         return this.webSocketServer;
     }
 }

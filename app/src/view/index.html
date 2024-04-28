@@ -14,55 +14,59 @@
 </head>
 
 <body>
-    <video id="videoPlayer" autoplay></video>
+    <video id="video" autoplay></video>
 
     <script>
-        var videoPlayer = document.getElementById('videoPlayer');
-        var mediaSource = new MediaSource();
+        const socket = new WebSocket('ws://localhost:8080');
+        socket.binaryType = 'arraybuffer';
 
-        videoPlayer.src = URL.createObjectURL(mediaSource);
+        const mediaSource = new MediaSource();
 
-        mediaSource.addEventListener('sourceopen', function () {
-            var sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.640028"');
-            initializeWebSocket(sourceBuffer);
-        });
+        mediaSource.addEventListener('sourceopen', () => {
+            const sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8, opus"');
+            let bufferQueue = [];
+            let updating = false;
 
-        function initializeWebSocket(sourceBuffer) {
-            var socket = new WebSocket('ws://localhost:8080');
-            socket.binaryType = 'arraybuffer';
-
-            var bufferQueue = [];
-            var isAppending = false;
-
-            socket.onmessage = function (event) {
-                if (!isAppending) {
-                    bufferQueue.push(event.data);
-                    appendNextBuffer();
-                } else {
-                    bufferQueue.push(event.data);
-                }
+            socket.onmessage = (event) => {
+                bufferQueue.push(new Uint8Array(event.data));
+                processBufferQueue();
             };
 
-            function appendNextBuffer() {
-                if (bufferQueue.length > 0) {
-                    isAppending = true;
-                    sourceBuffer.appendBuffer(bufferQueue.shift());
+            function processBufferQueue() {
+                if (!updating && bufferQueue.length > 0) {
+                    updating = true;
+                    const buffer = bufferQueue.shift();
+                    if (mediaSource.readyState === 'open') {
+                        sourceBuffer.appendBuffer(buffer);
+                    } else {
+                        console.log('Media source is not in open state: ', mediaSource.readyState);
+                    }
                 }
             }
 
-            sourceBuffer.addEventListener('updateend', function () {
-                isAppending = false;
-                appendNextBuffer();
+            sourceBuffer.addEventListener('updateend', () => {
+                updating = false;
+                processBufferQueue();
+                if (video.paused) {
+                    video.play();
+                }
             });
 
-            socket.onerror = function (error) {
-                console.error('Błąd połączenia WebSocket: ', error);
-            };
+            sourceBuffer.addEventListener('error', (event) => {
+                console.error('SourceBuffer error:', event);
+            });
+        });
 
-            socket.onclose = function (event) {
-                console.log('Połączenie zamknięte');
-            };
-        }
+        socket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
+
+        socket.onclose = () => {
+            console.log('WebSocket connection closed.');
+        };
+
+        const video = document.getElementById('video');
+        video.src = URL.createObjectURL(mediaSource);
     </script>
 </body>
 

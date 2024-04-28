@@ -6,7 +6,8 @@ export class Video {
     private static PORT = 11111;
 
     private server: Socket;
-    private videoPlayerProcess: any;
+    private ffmpegProcess: any;
+    private ffplayProcess: any;
 
     constructor() {
         this.server = createSocket('udp4');
@@ -14,12 +15,18 @@ export class Video {
 
     start() {
         this.server.on('message', (msg, rinfo) => {
-            if (!this.videoPlayerProcess) {
-                this.videoPlayerProcess = spawn('ffplay', ['-']);
-                // this.videoPlayerProcess = spawn('mpv', ['-']);
+            if (!this.ffmpegProcess) {
+                this.ffmpegProcess = spawn('ffmpeg', [
+                    '-i', 'pipe:0',
+                    '-vf', 'drawtext=text=\'Przykładowy tekst\':x=10:y=10:fontsize=24:fontcolor=red',
+                    '-f', 'mpegts',
+                    'pipe:1'
+                ]);
+                this.ffplayProcess = spawn('ffplay', ['-i', '-']);
+                this.ffmpegProcess.stdout.pipe(this.ffplayProcess.stdin);
             }
 
-            this.videoPlayerProcess.stdin.write(msg);
+            this.ffmpegProcess.stdin.write(msg);
         });
 
         this.server.on('listening', () => {
@@ -36,8 +43,11 @@ export class Video {
     }
 
     stop() {
-        if (this.videoPlayerProcess) {
-            this.videoPlayerProcess.kill();
+        if (this.ffmpegProcess) {
+            this.ffmpegProcess.kill();
+        }
+        if (this.ffplayProcess) {
+            this.ffplayProcess.kill();
         }
         this.server.close();
     }

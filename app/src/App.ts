@@ -29,7 +29,7 @@ export class App {
             result = await this.drone.streamon();
             console.log(`Streamon: ${result}`);
 
-            while (true) {}
+            // while (true) {}
 
             console.log('End');
         } catch (error) {

@@ -29,6 +29,8 @@ export class App {
             result = await this.drone.streamon();
             console.log(`Streamon: ${result}`);
 
+            while (true) {}
+
             console.log('End');
         } catch (error) {
             console.error(error);

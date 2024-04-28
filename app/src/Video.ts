@@ -1,10 +1,12 @@
 import { Socket, createSocket } from "dgram";
+import { spawn } from "child_process";
 
 export class Video {
     private static HOST = '0.0.0.0';
     private static PORT = 11111;
 
     private server: Socket;
+    private videoPlayerProcess: any;
 
     constructor() {
         this.server = createSocket('udp4');
@@ -12,6 +14,12 @@ export class Video {
 
     start() {
         this.server.on('message', (msg, rinfo) => {
+            if (!this.videoPlayerProcess) {
+                this.videoPlayerProcess = spawn('ffplay', ['-']);
+                // this.videoPlayerProcess = spawn('mpv', ['-']);
+            }
+
+            this.videoPlayerProcess.stdin.write(msg);
         });
 
         this.server.on('listening', () => {
@@ -28,6 +36,9 @@ export class Video {
     }
 
     stop() {
+        if (this.videoPlayerProcess) {
+            this.videoPlayerProcess.kill();
+        }
         this.server.close();
     }
 }

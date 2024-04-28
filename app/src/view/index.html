@@ -17,56 +17,47 @@
     <video id="video" autoplay></video>
 
     <script>
-        const socket = new WebSocket('ws://localhost:8080');
-        socket.binaryType = 'arraybuffer';
+        // const socketServerUrl = 'ws://localhost:8080';
+        // const socket = new WebSocket(socketServerUrl);
+        // socket.binaryType = 'arraybuffer';
 
-        const mediaSource = new MediaSource();
+        // const video = document.querySelector("#video");
+        // const mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+        // let mediaSource;
 
-        mediaSource.addEventListener('sourceopen', () => {
-            const sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="vp8, opus"');
-            let bufferQueue = [];
-            let updating = false;
+        // if ("MediaSource" in window && MediaSource.isTypeSupported(mimeCodec)) {
+        //     mediaSource = new MediaSource();
+        //     video.src = URL.createObjectURL(mediaSource);
 
-            socket.onmessage = (event) => {
-                bufferQueue.push(new Uint8Array(event.data));
-                processBufferQueue();
-            };
+        //     mediaSource.addEventListener("sourceopen", function () {
+        //         const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+        //     });
+        // } else {
+        //     console.error("Unsupported MIME type or codec: ", mimeCodec);
+        // }
 
-            function processBufferQueue() {
-                if (!updating && bufferQueue.length > 0) {
-                    updating = true;
-                    const buffer = bufferQueue.shift();
-                    if (mediaSource.readyState === 'open') {
-                        sourceBuffer.appendBuffer(buffer);
-                    } else {
-                        console.log('Media source is not in open state: ', mediaSource.readyState);
-                    }
-                }
-            }
+        var videoElement = document.getElementById('video');
+        var ws = new WebSocket('ws://localhost:8080');
 
-            sourceBuffer.addEventListener('updateend', () => {
-                updating = false;
-                processBufferQueue();
-                if (video.paused) {
-                    video.play();
-                }
-            });
+        ws.binaryType = 'arraybuffer';
 
-            sourceBuffer.addEventListener('error', (event) => {
-                console.error('SourceBuffer error:', event);
-            });
-        });
-
-        socket.onerror = (error) => {
-            console.error('WebSocket error:', error);
+        ws.onopen = function (event) {
+            console.log('Połączono z serwerem WebSocket.');
         };
 
-        socket.onclose = () => {
-            console.log('WebSocket connection closed.');
+        ws.onmessage = function (event) {
+            var blob = new Blob([event.data], { type: 'video/webm' }); // załóżmy, że przesyłasz wideo w formacie webm
+            var url = window.URL.createObjectURL(blob);
+            videoElement.src = url;
         };
 
-        const video = document.getElementById('video');
-        video.src = URL.createObjectURL(mediaSource);
+        ws.onerror = function (error) {
+            console.error('Błąd WebSocket: ', error);
+        };
+
+        ws.onclose = function (event) {
+            console.log('Połączenie z serwerem WebSocket zostało zamknięte.');
+        };
     </script>
 </body>
 

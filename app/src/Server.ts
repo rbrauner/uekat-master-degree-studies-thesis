@@ -24,24 +24,6 @@ export class Server {
         });
 
         this.webSocketServer = new WebSocket.Server({ port: Server.WS_PORT });
-
-        this.webSocketServer?.on('connection', (wss) => {
-            wss.on('message', (data) => {
-                const clients = this.webSocketServer?.clients;
-                if (!clients) {
-                    return;
-                }
-
-                for (const client of clients) {
-                    if (client.readyState !== WebSocket.OPEN) {
-                        return;
-                    }
-
-                    client.send(data);
-                }
-            });
-        });
-
     }
 
     async stop() {

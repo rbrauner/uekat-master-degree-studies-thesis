@@ -13,7 +13,11 @@ export class VideoServer {
 
     start(ws: WebSocket.Server | null) {
         this.server.on('message', (msg, rinfo) => {
-            ws?.emit('message', msg);
+            ws?.clients.forEach((client: any) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(msg);
+                }
+            });
         });
 
         this.server.on('listening', () => {

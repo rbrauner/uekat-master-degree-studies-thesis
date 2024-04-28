@@ -1,5 +1,3 @@
-const sdk = require('tellojs');
-const commander = require('tellojs/src/exchanger');
 import { Drone } from "./Drone";
 import { Video } from "./Video";
 

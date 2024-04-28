@@ -1,7 +1,6 @@
 import { Socket, createSocket } from "dgram";
-import WebSocket from "ws";
 
-export class VideoServer {
+export class Video {
     private static HOST = '0.0.0.0';
     private static PORT = 11111;
 
@@ -11,13 +10,8 @@ export class VideoServer {
         this.server = createSocket('udp4');
     }
 
-    start(ws: WebSocket.Server | null) {
+    start() {
         this.server.on('message', (msg, rinfo) => {
-            ws?.clients.forEach((client: any) => {
-                if (client.readyState === WebSocket.OPEN) {
-                    client.send(msg);
-                }
-            });
         });
 
         this.server.on('listening', () => {
@@ -30,7 +24,7 @@ export class VideoServer {
             this.server.close();
         });
 
-        this.server.bind(VideoServer.PORT, VideoServer.HOST);
+        this.server.bind(Video.PORT, Video.HOST);
     }
 
     stop() {

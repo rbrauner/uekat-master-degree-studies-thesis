@@ -14,11 +14,16 @@ export class Drone {
         return commander.send('streamon');
     }
 
+    async streamoff() {
+        return commander.send('streamoff');
+    }
+
     async land() {
         return sdk.control.land();
     }
 
     async stop() {
-        return this.land();
+        await this.land();
+        await this.streamoff();
     }
 }

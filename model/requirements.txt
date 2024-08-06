@@ -2,6 +2,7 @@ kaggle
 matplotlib
 notebook
 numpy
+pandas
 torch
 torchsummary
 torchvision

@@ -1,4 +1,6 @@
-# Model
+# uekat-master-degree-studies-thesis-model
+
+UE Katowice - Master Degree Studies - Thesis - Model
 
 ## Dataset
 
@@ -8,9 +10,9 @@
 
 - https://www.kaggle.com/code/amin98hosseini/asl-classification-recognition-using-pytorch
 
-## Install and run
+## Installation
 
-### Install
+### Dependencies
 
 1. Create venv:
 
@@ -30,14 +32,16 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-4. Copy .env:
+### Configuration
+
+1. Copy .env:
 
 ```sh
 cp .env.example .env
 ```
 
-5. Fill .env variables.
+2. Fill .env variables.
 
-### Run
+## Run
 
 Run `thesis.ipynb` notebook.

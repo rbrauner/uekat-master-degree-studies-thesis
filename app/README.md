@@ -2,34 +2,41 @@
 
 UE Katowice - Master Degree Studies - Thesis - App
 
-## Requirements
-
-- [Node 20.12.2](https://nodejs.org)
-- [Pnpm 9.0.6](https://pnpm.io)
-
 ## Installation
 
 ### Dependencies
 
+1. Create venv:
+
 ```sh
-pnpm install
+python -m venv venv
 ```
+
+2. Source activate script:
+
+```sh
+source venv/bin/activate
+```
+
+3. Install requirements:
+
+```sh
+pip install -r requirements.txt
+```
+
+### Configuration
+
+1. Copy .env:
+
+```sh
+cp .env.example .env
+```
+
+2. Fill .env variables.
 
 ## Run
 
 ```sh
-pnpm run dev
-```
-
-## Troubleshooting
-
-### Cannot connect drone <-> PC
-
-Solution: unlock firewall
-
-```sh
-sudo firewall-cmd --zone=public --add-port=8889/udp --permanent
-sudo firewall-cmd --zone=public --add-port=8890/udp --permanent
-sudo firewall-cmd --zone=public --add-port=11111/udp --permanent
-sudo firewall-cmd --reload
+source venv/bin/activate
+python main.py
 ```

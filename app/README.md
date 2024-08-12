@@ -2,6 +2,10 @@
 
 UE Katowice - Master Degree Studies - Thesis - App
 
+## Requirements
+
+- [Python 3.12.5](https://www.python.org)
+
 ## Installation
 
 ### Dependencies

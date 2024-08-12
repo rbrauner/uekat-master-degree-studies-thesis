@@ -23,6 +23,7 @@ class App:
 
             self.prepare_process_video()
 
+            print("Click 'q' to exit...")
             while True:
                 k = cv2.waitKey(1) & 0xFF
                 # press 'q' to exit

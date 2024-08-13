@@ -2,6 +2,10 @@
 
 UE Katowice - Master Degree Studies - Thesis - Model
 
+## Requirements
+
+- [Python 3.12.5](https://www.python.org)
+
 ## Dataset
 
 - https://www.kaggle.com/datasets/grassknoted/asl-alphabet

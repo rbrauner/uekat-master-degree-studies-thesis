@@ -1,0 +1,151 @@
+% !TeX spellcheck = pl_PL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                        %
+% Szablon pracy dyplomowej magisterskiej %
+% zgodny  z aktualnymi  przepisami  SZJK %
+%                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                        %
+%  (c) Krzysztof Simiński, 2018-2023     %
+%                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                        %
+% Najnowsza wersja szablonów jest        %
+% podstępna pod adresem                  %
+% github.com/ksiminski/polsl-aei-theses  %
+%                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%
+% Projekt LaTeXowy zapewnia odpowiednie formatowanie pracy,
+% zgodnie z wymaganiami Systemu zapewniania jakości kształcenia.
+% Proszę nie zmieniać ustawień formatowania (np. fontu,
+% marginesów, wytłuszczeń, kursywy itd. ).
+%
+% Projekt można kompilować na kilka sposobów.
+%
+% 1. kompilacja pdfLaTeX
+%
+% pdflatex main
+% bibtex   main
+% pdflatex main
+% pdflatex main
+%
+%
+% 2. kompilacja XeLaTeX
+%
+% Kompilatacja przy użyciu XeLaTeXa różni się tym, że na stronie
+% tytułowej używany jest font Calibri. Wymaga to jego uprzedniego
+% zainstalowania.
+%
+% xelatex main
+% bibtex  main
+% xelatex main
+% xelatex main
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% W przypadku pytań, uwag, proszę pisać na adres:   %
+%      krzysztof.siminski(małpa)polsl.pl            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Chcemy ulepszać szablony LaTeXowe prac dyplomowych.
+% Wypełniając ankietę spod poniższego adresu pomogą
+% Państwo nam to zrobić. Ankieta jest całkowicie
+% anonimowa. Dziękujemy!
+%
+% https://docs.google.com/forms/d/e/1FAIpQLScyllVxNKzKFHfILDfdbwC-jvT8YL0RSTFs-s27UGw9CKn-fQ/viewform?usp=sf_link
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                             %
+% PERSONALIZACJA PRACY – DANE PRACY           %
+%                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Proszę wpisać swoje dane w poniższych definicjach.
+
+% dane autora
+\newcommand{\FirstNameAuthor}{Rafał}
+\newcommand{\SurnameAuthor}{Brauner}
+\newcommand{\IdAuthor}{152865}
+
+% drugi autor:
+\newcommand{\FirstNameCoauthor}{}
+\newcommand{\SurnameCoauthor}{}
+\newcommand{\IdCoauthor}{}
+
+\newcommand{\Supervisor}{prof. dr hab. inż.Marcin Grzegorzek}
+\newcommand{\Title}{Aplikacja sterująca dronem przy pomocy gestów ręki}
+\newcommand{\TitleAlt}{An application that controls the drone using hand gestures}
+\newcommand{\Program}{Informatyka}
+\newcommand{\Specialisation}{Programowanie systemów inteligentnych}
+\newcommand{\Departament}{Katedra Inżynierii Wiedzy}
+\newcommand{\Consultant}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                             %
+% KONIEC PERSONALIZACJI PRACY                 %
+%                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{config/settings.tex}
+\input{config/my-settings.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%\kslistofremarks
+
+\frontmatter
+
+\input{config/titlepage.tex}
+
+\cleardoublepage
+\rmfamily\normalfont
+\pagestyle{empty}
+
+\input{chapters/00.tex} % informacje redakcyjne
+
+%%%%%%%%%%%%%%%%%% SPIS TRESCI %%%%%%%%%%%%%%%%%%%%%%
+% Add \thispagestyle{empty} to the toc file (main.toc), because \pagestyle{empty} doesn't work if the TOC has multiple pages
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\tableofcontents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{stronyPozaNumeracja}{\value{page}}
+\mainmatter
+\pagestyle{empty}
+\cleardoublepage
+\pagestyle{NumeryStronNazwyRozdzialow}
+
+%%%%%%%%%%%%%% wlasciwa tresc pracy %%%%%%%%%%%%%%%%%
+
+\input{chapters/01.tex}  % wstęp
+\input{chapters/02.tex} % [Analiza tematu]
+\input{chapters/03.tex} % [Przedmiot pracy]
+\input{chapters/04.tex} % Badania
+\input{chapters/05.tex} % Podsumowanie
+
+\backmatter
+
+%\bibliographystyle{plplain}  % bibtex
+%\bibliography{biblio/biblio} % bibtex
+\printbibliography           % biblatex
+\addcontentsline{toc}{chapter}{Bibliografia}
+
+\begin{appendices}
+    \input{chapters/06.tex} % dokumentacja techniczna
+    \input{chapters/07.tex} % Spis skrótów i symboli
+    \input{chapters/08.tex} % Lista dodatkowych plików, uzupełniających tekst pracy – jeżeli dotyczny, w przecinym razie – zakomentuj!
+
+    \listoffigures
+    \addcontentsline{toc}{chapter}{Spis rysunków}
+    \listoftables
+    \addcontentsline{toc}{chapter}{Spis tabel}
+\end{appendices}
+
+\end{document}

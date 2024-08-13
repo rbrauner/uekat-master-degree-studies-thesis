@@ -3,6 +3,7 @@ matplotlib
 notebook
 numpy
 pandas
+Pillow
 torch
 torchsummary
 torchvision
